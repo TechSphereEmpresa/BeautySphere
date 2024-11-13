@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import entidades.Agenda;
 import entidades.Cliente;
+import entidades.Enumeradas.Dias;
+import entidades.Enumeradas.Horas;
+import entidades.Enumeradas.Servicos;
 
-public class programa {
+public class Programa {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		Agenda horarios = new Agenda();
 		List<Cliente> listaClientes = new ArrayList<>();
 
 		System.out.println("Registro de clientes da TechSphere");
@@ -17,7 +22,6 @@ public class programa {
 		System.out.println("Olá, BeautySphere!");
 		System.out.println();
 		System.out.println("Quantos clientes para essa semana?");
-		System.out.println();
 		int n = sc.nextInt();
 
 		for (int i = 0; i < n; i++) {
@@ -26,19 +30,31 @@ public class programa {
 			System.out.println("Nome:");
 			sc.next();
 			String nome = sc.nextLine();
+			
 			System.out.println("Serviço:");
-			String servico = sc.nextLine();
+			/*for (Servicos servico : Servicos.values()) {
+				System.out.println("- " + servico);
+			}*/
+			String servico = sc.nextLine().toUpperCase();
+			/*try {
+				Servicos servicoEscolhido = Servicos.valueOf(servico);
+				System.out.println("Você escolheu o serviço de " + servicoEscolhido + ".");
+			} catch (IllegalArgumentException e) {
+				System.out.println("Serviço inválido. Por favor, escolha entre CORTE ou PENTEADO.");
+			}*/
+			
 			System.out.println("Horário:");
-			int horario = sc.nextInt();
-			listaClientes.add(new Cliente(nome, servico, horario));
+			
+			listaClientes.add(new Cliente(nome, servico));
+			horarios.setCliente(Horas.H10, Dias.TERCA, cliente);
 		}
-
+        
 		System.out.println();
 		System.out.println("Cronograma da semana:");
 		System.out.println();
 
-		for (int i = 0; i <= vetor.length; i++) {
+		/*for (int i = 0; i <= vetor.length; i++) {
 			System.out.println(vetor[i][0]);
-		}
+		}*/
 	}
 }
