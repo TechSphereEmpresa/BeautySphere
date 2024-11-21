@@ -9,6 +9,7 @@ public class Cliente {
 		super();
 		this.nome = nome;
 		this.servico = servico;
+		
 	}
 
 	public String getNome() {
