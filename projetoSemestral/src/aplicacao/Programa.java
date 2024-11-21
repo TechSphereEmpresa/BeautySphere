@@ -7,10 +7,12 @@ import java.util.Scanner;
 import entidades.Agenda;
 import entidades.Cliente;
 import entidades.Corte;
+import entidades.Penteado;
 import entidades.ServicoAbstrata;
 import entidades.Enumeradas.Cortes;
 import entidades.Enumeradas.Dias;
 import entidades.Enumeradas.Horas;
+import entidades.Enumeradas.Penteados;
 
 public class Programa {
 	public static void main(String[] args) {
@@ -68,10 +70,21 @@ public class Programa {
 				
 				listaServicos.add(new Corte(curvatura, comprimento, corte));
 
-			// TERMINAR Escolher penteado
+			//Tarefa para escolher penteado
 			} else if (servico == 'P'){
+				
+				System.out.println();
+				System.out.println("Penteados disponíveis:");
+				for (Penteados penteado : Penteados.values()) {
+					System.out.println("• " + penteado);
+				}
+
+				
 				System.out.println();
 				System.out.println("Escolha o penteado:");
+				Penteados penteado = Penteados.valueOf(sc.next().toUpperCase());
+				
+				listaServicos.add(new Penteado(curvatura, comprimento, penteado));
 				
 			} else {
 				System.out.println("Serviço inválido");
@@ -84,7 +97,7 @@ public class Programa {
 				System.out.println("• " + hora);
 			}
 
-			String horaEscolhida = sc.nextLine().toUpperCase();
+			String horaEscolhida = sc.next().toUpperCase();
 			Horas hora;
 
 			System.out.println("Escolha o dia:");
@@ -93,7 +106,7 @@ public class Programa {
 				System.out.println("• " + dia);
 			}
 
-			String diaEscolhido = sc.nextLine().toUpperCase();
+			String diaEscolhido = sc.next().toUpperCase();
 
 			Dias dia;
 
