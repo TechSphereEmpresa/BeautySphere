@@ -22,9 +22,13 @@ public class Corte extends ServicoAbstrata {
 	@Override
 	public Double valor() {
 		if (corte == Cortes.BOB) {
-			return 20.0;
-		} else {
 			return 50.0;
+		} else if (corte == Cortes.CHANEL){
+			return 60.0;
+		} else if (corte == Cortes.MULLET) {
+			return 45.0;
+		} else if (corte == Cortes.RASPAR){
+			return 35.0;
 		}
 	}
 }
