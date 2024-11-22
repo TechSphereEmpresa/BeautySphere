@@ -1,16 +1,14 @@
 package entidades;
 
-import entidades.Enumeradas.Dias;
-import entidades.Enumeradas.Horas;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Agenda {
-	private Cliente[][] horario = new Cliente[Horas.values().length][Dias.values().length];
+    private List<Cliente> clientes;
+    private List<String> horariosDisponiveis;
 
-	public void setCliente(Horas hora, Dias dia, Cliente cliente) {
-        horario[hora.ordinal()][dia.ordinal()] = cliente;
-    }
-	
-	public Cliente getCliente(Horas hora, Dias dia) {
-        return horario[hora.ordinal()][dia.ordinal()];
+    public Agenda() {
+        this.clientes = new ArrayList<>();
+        this.horariosDisponiveis = new ArrayList<>();
     }
 }
