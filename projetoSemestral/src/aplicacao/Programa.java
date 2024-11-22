@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import entidades.Agenda;
+import entidades.Caixa;
 import entidades.Cliente;
 import entidades.Corte;
 import entidades.Penteado;
@@ -13,6 +14,10 @@ import entidades.Enumeradas.Cortes;
 import entidades.Enumeradas.Dias;
 import entidades.Enumeradas.Horas;
 import entidades.Enumeradas.Penteados;
+import entidades.Cartao; 
+import entidades.Dinheiro;
+import entidades.Pagamento; 
+
 
 public class Programa {
 	public static void main(String[] args) {
@@ -111,14 +116,46 @@ public class Programa {
 			Dias dia;
 
 		}
-		//testando commit
 		// TERMINAR Exibindo a agenda
 		System.out.println();
 		System.out.println("Cronograma da semana:");
 		
-		sc.close();
-	}
-}
+		//Cartão ou Dinheiro
+
+            System.out.println();
+            System.out.println("Escolha a forma de pagamento: Cartão (C) ou Dinheiro (D):");
+            char pagamentoEscolhido = sc.next().toUpperCase().charAt(0);
+
+            // Processar o pagamento
+            if (pagamentoEscolhido == 'C') {
+                Cartao cartao = new Cartao(); 
+                for (ServicoAbstrata servicoItem : listaServicos) {
+                    double valor = servicoItem.valor();
+                    cartao.realizarPagamento(valor); 
+                }
+            } else if (pagamentoEscolhido == 'D') {
+                Dinheiro dinheiro = new Dinheiro(); 
+                for (ServicoAbstrata servicoItem : listaServicos) {
+                    double valor = servicoItem.valor(); 
+                    dinheiro.realizarPagamento(valor); 
+                }
+            } else {
+                System.out.println("Forma de pagamento inválida.");
+            }
+        }
+} 
+ // Colocar parte da fatura total
+
+  
+  /* System.out.println();
+  System.out.println("Faturamento total:");
+
+  Caixa caixa = new Caixa();
+  
+  System.out.println("Total faturado: R$" + caixa.faturamento(pagamento)); */
+
+
+
 // VERIFICAR HORARIOS MARCADOS
 
 // VERIFICAR RESPOSTA DO CORTE
@@ -136,4 +173,3 @@ public class Programa {
  * System.out.println("Corte inválido. Por favor, tente novamente."); }
  */
 
- //TESTEEEEEEEEEEEEEE COMMIT

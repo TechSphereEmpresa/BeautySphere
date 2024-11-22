@@ -30,5 +30,6 @@ public class Corte extends ServicoAbstrata {
 		} else if (corte == Cortes.RASPAR){
 			return 35.0;
 		}
+				return null; //tava dando erro e o vs code mandou botar isso
 	}
 }
