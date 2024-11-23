@@ -2,7 +2,7 @@ package entidades;
 
 public abstract class Pagamento {
         private double faturamentoTotal = 0.0;
-        public abstract void realizarPagamento(double valor);
+        public abstract Double realizarPagamento(double valor);
     
         public double getFaturamentoTotal() {
             return faturamentoTotal;
