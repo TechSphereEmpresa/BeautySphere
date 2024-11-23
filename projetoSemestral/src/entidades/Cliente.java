@@ -5,13 +5,13 @@ import java.util.List;
 public class Cliente {
 	private String nome;
 	private String horarioEscolhido;
-	private List<ServicoAbstrata> listaServicos;
+	private Servico servico;
 
-	public Cliente(String nome, String horarioEscolhido, List<ServicoAbstrata> listaServicos) {
+	public Cliente(String nome, String horarioEscolhido, Servico servico) {
 		super();
 		this.nome = nome;
 		this.horarioEscolhido = horarioEscolhido;
-		this.listaServicos = listaServicos;
+		this.servico = servico;
 	}
 	
 	public String getNome() {
@@ -29,17 +29,17 @@ public class Cliente {
 	public void setHorarioEscolhido(String horarioEscolhido) {
 		this.horarioEscolhido = horarioEscolhido;
 	}
-	
-	public List<ServicoAbstrata> getListaServicos() {
-		return listaServicos;
+
+	public Servico getServico() {
+		return servico;
 	}
-	
-	public void setListaServicos(List<ServicoAbstrata> listaServicos) {
-		this.listaServicos = listaServicos;
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
 	}
 
 	@Override
     public String toString() {
-        return horarioEscolhido + " - " + nome + ", " + listaServicos;
+        return horarioEscolhido + " - " + nome + ", " + servico;
     }
 }
