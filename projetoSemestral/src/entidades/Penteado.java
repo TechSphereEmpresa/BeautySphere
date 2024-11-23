@@ -6,7 +6,7 @@ public class Penteado extends ServicoAbstrata {
 	
 	private Penteados penteado;
 
-	public Penteado(char curvatura, char comprimento, Penteados penteado) {
+	public Penteado(String curvatura, String comprimento, Penteados penteado) {
 		super(curvatura, comprimento);
 		this.penteado = penteado;
 	}
