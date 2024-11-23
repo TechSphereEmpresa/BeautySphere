@@ -3,12 +3,57 @@ package entidades;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Agenda {
-    private List<Cliente> clientes;
-    private List<String> horariosDisponiveis;
+import entidades.Enumeradas.Horas;
 
-    public Agenda() {
-        this.clientes = new ArrayList<>();
-        this.horariosDisponiveis = new ArrayList<>();
+public class Agenda {
+    private List<Cliente> listaClientes = new ArrayList<>();
+    private List<Horas> horariosDisponiveis = new ArrayList<>();
+    
+    public Agenda(List<Cliente> listaClientes, List<Horas> horariosDisponiveis) {
+		super();
+		this.listaClientes = listaClientes;
+		this.horariosDisponiveis = horariosDisponiveis;
+		
+		for (Horas h : Horas.values()) {
+	        horariosDisponiveis.add(h);
+	    }
+	}
+    
+	public List<Cliente> getListaClientes() {
+		return listaClientes;
+	}
+
+	public void setListaClientes(List<Cliente> listaClientes) {
+		this.listaClientes = listaClientes;
+	}
+
+	public List<Horas> getHorariosDisponiveis() {
+		return horariosDisponiveis;
+	}
+
+	public void setHorariosDisponiveis(List<Horas> horariosDisponiveis) {
+		this.horariosDisponiveis = horariosDisponiveis;
+	}
+	
+	// Metodos
+	public void addCliente (Cliente cliente) {
+    	listaClientes.add(cliente);
+    }
+    
+	public void exibirHorarios() {
+		for (Horas h : horariosDisponiveis) {
+			System.out.println("• " + h.getHora() + " (" + h + ")");
+		}
+	}
+	
+	public void marcarHorario(String horarioEscolhido) {
+		Horas hEscolhido = Horas.valueOf(horarioEscolhido);
+		horariosDisponiveis.remove(hEscolhido); // Remove o horário da lista de disponíveis
+	}
+	
+    public void exibirAgenda() {
+    	for (Cliente c : listaClientes) {
+			System.out.println(c);
+		}
     }
 }
