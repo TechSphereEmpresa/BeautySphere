@@ -9,7 +9,7 @@ import entidades.Caixa;
 import entidades.Cliente;
 import entidades.Corte;
 import entidades.Penteado;
-import entidades.ServicoAbstrata;
+import entidades.Servico;
 import entidades.Enumeradas.Cortes;
 import entidades.Enumeradas.Dias;
 import entidades.Enumeradas.Horas;
@@ -21,15 +21,10 @@ import entidades.Pagamento;
 public class Programa {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		Agenda agenda = new Agenda();
 		List<Cliente> listaClientes = new ArrayList<>();
-		List<String> horariosDisponiveis = new ArrayList<String>();
-		horariosDisponiveis.add("09:00");
-		horariosDisponiveis.add("10:00");
-		horariosDisponiveis.add("11:00");
-		horariosDisponiveis.add("14:00");
-		horariosDisponiveis.add("15:00");
-		List<ServicoAbstrata> listaServicos = new ArrayList<>();
+		List<Horas> horariosDisponiveis = new ArrayList<>();
+		Agenda agenda = new Agenda(listaClientes, horariosDisponiveis);
+		Servico servico;
 
 		System.out.println("Registro de clientes da TechSphere");
 		System.out.println();
@@ -49,32 +44,51 @@ public class Programa {
 
 			// Escolher horario
 			System.out.println("Horários disponíveis:");
-			for (String horario : horariosDisponiveis) {
-				System.out.println("• " + horario);
-			}
+			agenda.exibirHorarios();
+
 			System.out.println("Escolha um horário:");
-			String horarioEscolhido = sc.nextLine();
-			horariosDisponiveis.remove(horarioEscolhido); // Remove o horário da lista de disponíveis
+			String horarioEscolhido = sc.nextLine().toUpperCase();
+			agenda.marcarHorario(horarioEscolhido);
 
 			// Digitar curvatura
 			System.out.println();
 			System.out.println("Liso (1), Ondulado (2), Cacheado (3), Crespo (4)");
 			System.out.println("Qual a curvatura do cabelo?");
-			char curvatura = sc.next().charAt(0);
+			char curvaturaChar = sc.next().charAt(0);
+
+			String curvatura = null;
+			if (curvaturaChar == '1') {
+				curvatura = "liso";
+			} else if (curvaturaChar == '2') {
+				curvatura = "ondulado";
+			} else if (curvaturaChar == '3') {
+				curvatura = "cacheado";
+			} else if (curvaturaChar =='4') {
+				curvatura = "crespo";
+			}
 
 			// Digitar comprimento
 			System.out.println();
 			System.out.println("Curto (1), Médio (2), Longo (3)");
 			System.out.println("Qual o comprimento do cabelo?");
-			char comprimento = sc.next().charAt(0);
+			char comprimentoChar = sc.next().charAt(0);
+
+			String comprimento = null;
+			if (comprimentoChar == '1') {
+				comprimento = "curto";
+			} else if (comprimentoChar == '2') {
+				comprimento = "médio";
+			} else if (comprimentoChar == '3') {
+				comprimento = "longo";
+			}
 
 			// Escolher servico
 			System.out.println();
 			System.out.println("Escolha o serviço: corte (C) ou penteado (P):");
-			char servico = sc.next().toUpperCase().charAt(0);
+			char servicoEscolhido = sc.next().toUpperCase().charAt(0);
 
 			// Escolher corte
-			if (servico == 'C') {
+			if (servicoEscolhido == 'C') {
 
 				System.out.println();
 				System.out.println("Cortes disponíveis:");
@@ -86,11 +100,12 @@ public class Programa {
 				System.out.println("Escolha o corte:");
 				Cortes corte = Cortes.valueOf(sc.next().toUpperCase());
 
-				listaServicos.add(new Corte(curvatura, comprimento, corte));
-				listaClientes.add(new Cliente(nome, horarioEscolhido, listaServicos));
+				servico = new Corte(curvatura, comprimento, corte);
+				Cliente cliente = new Cliente(nome, horarioEscolhido, servico);
+				agenda.addCliente(cliente);
 
-			// Escolher penteado
-			} else if (servico == 'P') {
+				// Escolher penteado
+			} else if (servicoEscolhido == 'P') {
 
 				System.out.println();
 				System.out.println("Penteados disponíveis:");
@@ -102,19 +117,151 @@ public class Programa {
 				System.out.println("Escolha o penteado:");
 				Penteados penteado = Penteados.valueOf(sc.next().toUpperCase());
 
-				listaServicos.add(new Penteado(curvatura, comprimento, penteado));
+				// (new Penteado(curvatura, comprimento, penteado));
 
 			} else {
 				System.out.println("Serviço inválido");
 			}
 		}
+
 		// Exibir a agenda
 		System.out.println();
 		System.out.println("Cronograma da semana:");
+		agenda.exibirAgenda();
 
-		for (Cliente c : listaClientes) {
-            System.out.println(c);
-        }
+		// Cartão ou Dinheiro
+		package aplicacao;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import entidades.Agenda;
+import entidades.Caixa;
+import entidades.Cliente;
+import entidades.Corte;
+import entidades.Penteado;
+import entidades.Servico;
+import entidades.Enumeradas.Cortes;
+import entidades.Enumeradas.Dias;
+import entidades.Enumeradas.Horas;
+import entidades.Enumeradas.Penteados;
+import entidades.Cartao;
+import entidades.Dinheiro;
+import entidades.Pagamento;
+
+public class Programa {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		List<Cliente> listaClientes = new ArrayList<>();
+		List<Horas> horariosDisponiveis = new ArrayList<>();
+		Agenda agenda = new Agenda(listaClientes, horariosDisponiveis);
+		Servico servico;
+
+		System.out.println("Registro de clientes da TechSphere");
+		System.out.println();
+		System.out.println("Olá, BeautySphere!");
+		System.out.println();
+		System.out.println("Quantos clientes para essa semana?");
+		int n = sc.nextInt();
+		sc.nextLine();
+
+		// Digitar clientes
+		for (int i = 0; i < n; i++) {
+			System.out.println();
+			System.out.println("Cliente #" + (i + 1) + ":");
+			System.out.println("Nome:");
+			sc.next();
+			String nome = sc.nextLine();
+
+			// Escolher horario
+			System.out.println("Horários disponíveis:");
+			agenda.exibirHorarios();
+
+			System.out.println("Escolha um horário:");
+			String horarioEscolhido = sc.nextLine().toUpperCase();
+			agenda.marcarHorario(horarioEscolhido);
+
+			// Digitar curvatura
+			System.out.println();
+			System.out.println("Liso (1), Ondulado (2), Cacheado (3), Crespo (4)");
+			System.out.println("Qual a curvatura do cabelo?");
+			char curvaturaChar = sc.next().charAt(0);
+
+			String curvatura = null;
+			if (curvaturaChar == '1') {
+				curvatura = "liso";
+			} else if (curvaturaChar == '2') {
+				curvatura = "ondulado";
+			} else if (curvaturaChar == '3') {
+				curvatura = "cacheado";
+			} else if (curvaturaChar =='4') {
+				curvatura = "crespo";
+			}
+
+			// Digitar comprimento
+			System.out.println();
+			System.out.println("Curto (1), Médio (2), Longo (3)");
+			System.out.println("Qual o comprimento do cabelo?");
+			char comprimentoChar = sc.next().charAt(0);
+
+			String comprimento = null;
+			if (comprimentoChar == '1') {
+				comprimento = "curto";
+			} else if (comprimentoChar == '2') {
+				comprimento = "médio";
+			} else if (comprimentoChar == '3') {
+				comprimento = "longo";
+			}
+
+			// Escolher servico
+			System.out.println();
+			System.out.println("Escolha o serviço: corte (C) ou penteado (P):");
+			char servicoEscolhido = sc.next().toUpperCase().charAt(0);
+
+			// Escolher corte
+			if (servicoEscolhido == 'C') {
+
+				System.out.println();
+				System.out.println("Cortes disponíveis:");
+				for (Cortes corte : Cortes.values()) {
+					System.out.println("• " + corte);
+				}
+
+				System.out.println();
+				System.out.println("Escolha o corte:");
+				Cortes corte = Cortes.valueOf(sc.next().toUpperCase());
+
+				servico = new Corte(curvatura, comprimento, corte);
+				Cliente cliente = new Cliente(nome, horarioEscolhido, servico);
+				agenda.addCliente(cliente);
+
+				// Escolher penteado
+			} else if (servicoEscolhido == 'P') {
+
+				System.out.println();
+				System.out.println("Penteados disponíveis:");
+				for (Penteados penteado : Penteados.values()) {
+					System.out.println("• " + penteado);
+				}
+
+				System.out.println();
+				System.out.println("Escolha o penteado:");
+				Penteados penteado = Penteados.valueOf(sc.next().toUpperCase());
+
+				servico = new Penteado(curvatura, comprimento, penteado);
+				Cliente cliente = new Cliente(nome, horarioEscolhido, servico);
+				agenda.addCliente(cliente);
+				
+			} else {
+				System.out.println("Serviço inválido");
+			}
+		}
+
+		// Exibir a agenda
+		System.out.println();
+		System.out.println("Cronograma da semana:");
+		agenda.exibirAgenda();
 
 		// Cartão ou Dinheiro
 
