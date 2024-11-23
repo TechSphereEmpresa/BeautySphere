@@ -1,28 +1,29 @@
 package entidades;
 
 public abstract class ServicoAbstrata implements Servico {
-	private char curvatura;
-	private char comprimento;
+	private String curvatura;
+	private String comprimento;
 	
-	public ServicoAbstrata(char curvatura, char comprimento) {
+	public ServicoAbstrata(String curvatura, String comprimento) {
 		super();
 		this.curvatura = curvatura;
 		this.comprimento = comprimento;
 	}
 
-	public char getCurvatura() {
+	public String getCurvatura() {
 		return curvatura;
 	}
 
-	public void setCurvatura(char curvatura) {
+	public void setCurvatura(String curvatura) {
 		this.curvatura = curvatura;
 	}
 
-	public char getComprimento() {
+	public String getComprimento() {
 		return comprimento;
 	}
 
-	public void setComprimento(char comprimento) {
+	public void setComprimento(String comprimento) {
 		this.comprimento = comprimento;
-	}	
+	}
+	
 }
