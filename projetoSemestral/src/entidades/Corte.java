@@ -6,7 +6,7 @@ public class Corte extends ServicoAbstrata {
 	
 	private Cortes corte;
 
-	public Corte(char curvatura, char comprimento, Cortes corte) {
+	public Corte(String curvatura, String comprimento, Cortes corte) {
 		super(curvatura, comprimento);
 		this.corte = corte;
 	}
@@ -30,6 +30,10 @@ public class Corte extends ServicoAbstrata {
 		} else if (corte == Cortes.RASPAR){
 			return 35.0;
 		}
-				return null; //tava dando erro e o vs code mandou botar isso
+		return null; //tava dando erro e o vs code mandou botar isso
 	}
+	
+	public String toString() {
+		return "corte " + corte + ", cabelo " + getCurvatura() + " " + getComprimento() + ". Valor: R$" + valor();
+	}	
 }
