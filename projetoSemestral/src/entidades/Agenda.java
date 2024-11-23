@@ -39,6 +39,10 @@ public class Agenda {
 	public void addCliente (Cliente cliente) {
     	listaClientes.add(cliente);
     }
+
+	public void removeCliente(Cliente cliente) {
+		listaClientes.remove(cliente);
+	}
     
 	public void exibirHorarios() {
 		for (Horas h : horariosDisponiveis) {

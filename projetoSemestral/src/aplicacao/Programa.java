@@ -127,7 +127,30 @@ public class Programa {
 
 		// Exibir a agenda
 		System.out.println();
-		System.out.println("Cronograma da semana:");
+		System.out.println("Cronograma do dia:");
+		agenda.exibirAgenda();
+
+		// Excluir ou editar cliente
+		System.out.println();
+		System.out.println("Deseja excluir algum cliente? (S/N)");
+        char resposta = sc.next().toUpperCase().charAt(0);
+
+        if (resposta == 'S') {
+            System.out.println("Digite o nome do cliente a ser excluído:");
+			sc.nextLine();
+            String clienteExcluir = sc.nextLine();
+
+            for (Cliente cliente : listaClientes) {
+                if (cliente.getNome() == clienteExcluir) {
+                    agenda.removeCliente(cliente);
+                    break;
+                }
+            }
+		}
+
+		// Exibir a agenda
+		System.out.println();
+		System.out.println("Cronograma do dia:");
 		agenda.exibirAgenda();
 
 		/*// Cartão ou Dinheiro
