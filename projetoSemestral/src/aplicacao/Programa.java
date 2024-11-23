@@ -128,12 +128,14 @@ public class Programa {
 			for (ServicoAbstrata servicoItem : listaServicos) {
 				double valor = servicoItem.valor();
 				cartao.realizarPagamento(valor);
+				System.out.println(cartao.ToString(valor));
 			}
 		} else if (pagamentoEscolhido == 'D') {
 			Dinheiro dinheiro = new Dinheiro();
 			for (ServicoAbstrata servicoItem : listaServicos) {
 				double valor = servicoItem.valor();
 				dinheiro.realizarPagamento(valor);
+				System.out.println(dinheiro.ToString(valor));
 			}
 		} else {
 			System.out.println("Forma de pagamento inválida.");
