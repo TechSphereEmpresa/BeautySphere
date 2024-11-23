@@ -32,14 +32,13 @@ public class Programa {
 		System.out.println();
 		System.out.println("Quantos clientes para essa semana?");
 		int n = sc.nextInt();
-		sc.nextLine();
-
+		
 		// Digitar clientes
 		for (int i = 0; i < n; i++) {
 			System.out.println();
 			System.out.println("Cliente #" + (i + 1) + ":");
 			System.out.println("Nome:");
-			sc.next();
+			sc.nextLine();
 			String nome = sc.nextLine();
 
 			// Escolher horario
@@ -117,7 +116,9 @@ public class Programa {
 				System.out.println("Escolha o penteado:");
 				Penteados penteado = Penteados.valueOf(sc.next().toUpperCase());
 
-				// (new Penteado(curvatura, comprimento, penteado));
+				servico = new Penteado(curvatura, comprimento, penteado);
+				Cliente cliente = new Cliente(nome, horarioEscolhido, servico);
+				agenda.addCliente(cliente);
 
 			} else {
 				System.out.println("Serviço inválido");
