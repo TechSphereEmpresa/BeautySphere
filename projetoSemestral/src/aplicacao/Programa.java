@@ -21,10 +21,16 @@ import entidades.Pagamento;
 public class Programa {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+
 		List<Cliente> listaClientes = new ArrayList<>();
 		List<Horas> horariosDisponiveis = new ArrayList<>();
+
 		Agenda agenda = new Agenda(listaClientes, horariosDisponiveis);
+		Cartao cartao = new Cartao();
+		Dinheiro dinheiro = new Dinheiro();
+
 		Servico servico;
+		double valor;
 
 		System.out.println("Registro de clientes da TechSphere");
 		System.out.println();
@@ -32,7 +38,7 @@ public class Programa {
 		System.out.println();
 		System.out.println("Quantos clientes para essa semana?");
 		int n = sc.nextInt();
-		
+
 		// Digitar clientes
 		for (int i = 0; i < n; i++) {
 			System.out.println();
@@ -65,7 +71,7 @@ public class Programa {
 				curvatura = "ondulado";
 			} else if (curvaturaChar == '3') {
 				curvatura = "cacheado";
-			} else if (curvaturaChar =='4') {
+			} else if (curvaturaChar == '4') {
 				curvatura = "crespo";
 			}
 
@@ -95,8 +101,8 @@ public class Programa {
 
 				System.out.println();
 				System.out.println("Cortes disponíveis:");
-				for (Cortes corte : Cortes.values()) {
-					System.out.println("• " + corte);
+				for (Cortes c : Cortes.values()) {
+					System.out.println("• " + c);
 				}
 
 				System.out.println();
@@ -104,10 +110,24 @@ public class Programa {
 				Cortes corte = Cortes.valueOf(sc.next().toUpperCase());
 
 				servico = new Corte(curvatura, comprimento, corte);
-				Cliente cliente = new Cliente(nome, horarioEscolhido, servico);
+
+				// Cartão ou Dinheiro
+				System.out.println();
+				System.out.println("Escolha a forma de pagamento: Cartão (C) ou Dinheiro (D)");
+				char pagamentoEscolhido = sc.next().toUpperCase().charAt(0);
+
+				// Processar o pagamento
+				if (pagamentoEscolhido == 'C') {
+					cartao.realizarPagamento(servico.valor());
+					
+				} else if (pagamentoEscolhido == 'D') {
+					dinheiro.realizarPagamento(servico.valor());
+				}
+				
+				Cliente cliente = new Cliente(nome, horarioEscolhido, servico, pagamento);
 				agenda.addCliente(cliente);
 
-				// Escolher penteado
+			// Escolher penteado
 			} else if (servicoEscolhido == 'P') {
 
 				System.out.println();
@@ -137,20 +157,20 @@ public class Programa {
 		// Excluir ou editar cliente
 		System.out.println();
 		System.out.println("Deseja excluir algum cliente? (S/N)");
-        char resposta = sc.next().toUpperCase().charAt(0);
-		
-        if (resposta == 'S') {
+		char resposta = sc.next().toUpperCase().charAt(0);
+
+		if (resposta == 'S') {
 			System.out.println();
 			System.out.println("Quantos clientes excluir?");
 			int quantExcluir = sc.nextInt();
-			
+
 			for (int i = 0; i < quantExcluir; i++) {
 				System.out.println();
-				System.out.println("Cliente para excluir #" + (i+1) + ":");
+				System.out.println("Cliente para excluir #" + (i + 1) + ":");
 				System.out.println("Digite o horário desse cliente:");
 				sc.nextLine();
 				String horarioExcluir = sc.nextLine().toUpperCase();
-	
+
 				for (Cliente c : listaClientes) {
 					if (c.getHorarioEscolhido().equals(horarioExcluir)) {
 						agenda.removeCliente(c);
@@ -159,37 +179,13 @@ public class Programa {
 				}
 			}
 
-		// Exibir faturamento
-		System.out.println();
-		System.out.println("Faturamento do dia:");
-		agenda.exibirAgenda();
+			// Exibir faturamento
+			System.out.println();
+			System.out.println("Faturamento do dia:");
+			agenda.exibirAgenda();
 
-		/*// Cartão ou Dinheiro
-
-		System.out.println();
-		System.out.println("Escolha a forma de pagamento: Cartão (C) ou Dinheiro (D):");
-		char pagamentoEscolhido = sc.next().toUpperCase().charAt(0);
-
-		// Processar o pagamento
-		if (pagamentoEscolhido == 'C') {
-			Cartao cartao = new Cartao();
-			for (ServicoAbstrata servicoItem : listaServicos) {
-				double valor = servicoItem.valor();
-				cartao.realizarPagamento(valor);
-				System.out.println(cartao.ToString(valor));
-			}
-		} else if (pagamentoEscolhido == 'D') {
-			Dinheiro dinheiro = new Dinheiro();
-			for (ServicoAbstrata servicoItem : listaServicos) {
-				double valor = servicoItem.valor();
-				dinheiro.realizarPagamento(valor);
-				System.out.println(dinheiro.ToString(valor));
-			}
-		} else {
-			System.out.println("Forma de pagamento inválida.");
-		}*/
+		}
 	}
-}
 }
 // Colocar parte da fatura total
 
