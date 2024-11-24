@@ -29,6 +29,6 @@ public class Penteado extends ServicoAbstrata {
 	}
 
 	public String toString() {
-		return "penteado " + penteado + ", cabelo " + getCurvatura() + " " + getComprimento() + ". Valor: R$" + valor();
+		return "penteado " + penteado + ", cabelo " + getCurvatura() + " " + getComprimento();
 	}	
 }

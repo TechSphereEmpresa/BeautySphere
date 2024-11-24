@@ -14,7 +14,7 @@ import entidades.Enumeradas.Cortes;
 import entidades.Enumeradas.Dias;
 import entidades.Enumeradas.Horas;
 import entidades.Enumeradas.Penteados;
-import entidades.Cartao;
+import entidades.PagamentoBoleto;
 import entidades.Dinheiro;
 import entidades.Pagamento;
 
@@ -26,17 +26,17 @@ public class Programa {
 		List<Horas> horariosDisponiveis = new ArrayList<>();
 
 		Agenda agenda = new Agenda(listaClientes, horariosDisponiveis);
-		Cartao cartao = new Cartao();
-		Dinheiro dinheiro = new Dinheiro();
+		//Dinheiro dinheiro = new Dinheiro();
 
 		Servico servico;
-		double valor;
+		double taxa = 1.05;
+		Pagamento pagamento = null;
 
 		System.out.println("Registro de clientes da TechSphere");
 		System.out.println();
 		System.out.println("Olá, BeautySphere!");
 		System.out.println();
-		System.out.println("Quantos clientes para essa semana?");
+		System.out.println("Quantos clientes para hoje?");
 		int n = sc.nextInt();
 
 		// Digitar clientes
@@ -113,15 +113,19 @@ public class Programa {
 
 				// Cartão ou Dinheiro
 				System.out.println();
-				System.out.println("Escolha a forma de pagamento: Cartão (C) ou Dinheiro (D)");
+				System.out.println("Escolha a forma de pagamento: Boleto (B) ou Dinheiro (D)");
 				char pagamentoEscolhido = sc.next().toUpperCase().charAt(0);
 
 				// Processar o pagamento
-				if (pagamentoEscolhido == 'C') {
-					cartao.realizarPagamento(servico.valor());
+				double valor = servico.valor();
+				if (pagamentoEscolhido == 'B') {
+					System.out.println();
+					System.out.println("Digite o número de parcelas:");
+					int nParcelas = sc.nextInt();
+					pagamento = new PagamentoBoleto(valor, taxa, nParcelas);
 					
 				} else if (pagamentoEscolhido == 'D') {
-					dinheiro.realizarPagamento(servico.valor());
+					pagamento = new Pagamento(valor);
 				}
 				
 				Cliente cliente = new Cliente(nome, horarioEscolhido, servico, pagamento);
@@ -141,9 +145,27 @@ public class Programa {
 				Penteados penteado = Penteados.valueOf(sc.next().toUpperCase());
 
 				servico = new Penteado(curvatura, comprimento, penteado);
-				Cliente cliente = new Cliente(nome, horarioEscolhido, servico);
-				agenda.addCliente(cliente);
+				
+				// Cartão ou Dinheiro
+				System.out.println();
+				System.out.println("Escolha a forma de pagamento: Boleto (B) ou Dinheiro (D)");
+				char pagamentoEscolhido = sc.next().toUpperCase().charAt(0);
 
+				// Processar o pagamento
+				double valor = servico.valor();
+				if (pagamentoEscolhido == 'B') {
+					System.out.println();
+					System.out.println("Digite o número de parcelas:");
+					int nParcelas = sc.nextInt();
+					pagamento = new PagamentoBoleto(valor, taxa, nParcelas);
+					
+				} else if (pagamentoEscolhido == 'D') {
+					pagamento = new Pagamento(valor);
+				}
+				
+				Cliente cliente = new Cliente(nome, horarioEscolhido, servico, pagamento);
+				agenda.addCliente(cliente);
+				
 			} else {
 				System.out.println("Serviço inválido");
 			}
@@ -174,17 +196,17 @@ public class Programa {
 				for (Cliente c : listaClientes) {
 					if (c.getHorarioEscolhido().equals(horarioExcluir)) {
 						agenda.removeCliente(c);
+						System.out.println();
 						System.out.println("Cliente do horário " + c.getHorarioEscolhido() + " excluído");
 					}
 				}
 			}
-
-			// Exibir faturamento
-			System.out.println();
-			System.out.println("Faturamento do dia:");
-			agenda.exibirAgenda();
-
 		}
+
+		// Exibir faturamento
+		System.out.println();
+		System.out.println("Faturamento do dia:");
+		agenda.exibirAgenda();
 	}
 }
 // Colocar parte da fatura total
@@ -195,21 +217,4 @@ public class Programa {
  * Caixa caixa = new Caixa();
  * 
  * System.out.println("Total faturado: R$" + caixa.faturamento(pagamento));
- */
-
-// VERIFICAR HORARIOS MARCADOS
-
-// VERIFICAR RESPOSTA DO CORTE
-/*
- * boolean corteValido = false; // Variável para controlar a validação do corte
- * 
- * while (!corteValido) { // Enquanto o corte não for válido
- * System.out.println(); System.out.print("Escolha o corte: "); String
- * corteInput = sc.nextLine().toUpperCase(); // Converter entrada para
- * maiúsculas
- * 
- * try { corteEscolhido = Cortes.valueOf(corteInput); // Tentar converter para
- * enum corteValido = true; // Atualiza para verdadeiro se o corte for válido }
- * catch (IllegalArgumentException e) { System.out.println();
- * System.out.println("Corte inválido. Por favor, tente novamente."); }
  */

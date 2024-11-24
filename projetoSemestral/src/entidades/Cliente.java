@@ -8,12 +8,14 @@ public class Cliente {
 	private String nome;
 	private String horarioEscolhido;
 	private Servico servico;
+	private Pagamento pagamento;
 
-	public Cliente(String nome, String horarioEscolhido, Servico servico) {
+	public Cliente(String nome, String horarioEscolhido, Servico servico, Pagamento pagamento) {
 		super();
 		this.nome = nome;
 		this.horarioEscolhido = horarioEscolhido;
 		this.servico = servico;
+		this.pagamento = pagamento;
 	}
 	
 	public String getNome() {
@@ -40,8 +42,16 @@ public class Cliente {
 		this.servico = servico;
 	}
 
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
 	@Override
     public String toString() {
-		return Horas.valueOf(horarioEscolhido) + ": " + nome + ", " + servico;
+		return Horas.valueOf(horarioEscolhido) + ": " + nome + ", " + servico + ". Valor R%" + pagamento.realizarPagamento();
     }
 }

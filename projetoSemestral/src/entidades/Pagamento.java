@@ -1,10 +1,30 @@
 package entidades;
 
-public abstract class Pagamento {
-        private double faturamentoTotal = 0.0;
-        public abstract Double realizarPagamento(double valor);
-    
-        public double getFaturamentoTotal() {
+public class Pagamento {
+        private Double valor;
+        
+        public Pagamento(Double valor) {
+			super();
+			this.valor = valor;
+		}
+
+		public Double getValor() {
+			return valor;
+		}
+
+		public void setValor(Double valor) {
+			this.valor = valor;
+		}
+		
+		public Double realizarPagamento() {
+			return valor;
+		}
+		
+		/*public void setFaturamentoTotal(Double faturamentoTotal) {
+			this.faturamentoTotal = faturamentoTotal;
+		}
+
+		public double getFaturamentoTotal() {
             return faturamentoTotal;
         }
     
@@ -14,6 +34,7 @@ public abstract class Pagamento {
     
         public double faturamento() {
             return faturamentoTotal;
-        }
+        }*/
+		
+		
     }
-    

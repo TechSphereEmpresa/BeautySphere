@@ -34,6 +34,6 @@ public class Corte extends ServicoAbstrata {
 	}
 	
 	public String toString() {
-		return "corte " + corte + ", cabelo " + getCurvatura() + " " + getComprimento() + ". Valor: R$" + valor();
+		return "corte " + corte + ", cabelo " + getCurvatura() + " " + getComprimento();
 	}	
 }
