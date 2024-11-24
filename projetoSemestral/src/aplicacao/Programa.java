@@ -42,9 +42,11 @@ public class Programa {
 			String nome = sc.nextLine();
 
 			// Escolher horario
+			System.out.println();
 			System.out.println("Horários disponíveis:");
 			agenda.exibirHorarios();
 
+			System.out.println();
 			System.out.println("Escolha um horário:");
 			String horarioEscolhido = sc.nextLine().toUpperCase();
 			agenda.marcarHorario(horarioEscolhido);
@@ -52,6 +54,7 @@ public class Programa {
 			// Digitar curvatura
 			System.out.println();
 			System.out.println("Liso (1), Ondulado (2), Cacheado (3), Crespo (4)");
+			System.out.println();
 			System.out.println("Qual a curvatura do cabelo?");
 			char curvaturaChar = sc.next().charAt(0);
 
@@ -69,6 +72,7 @@ public class Programa {
 			// Digitar comprimento
 			System.out.println();
 			System.out.println("Curto (1), Médio (2), Longo (3)");
+			System.out.println();
 			System.out.println("Qual o comprimento do cabelo?");
 			char comprimentoChar = sc.next().charAt(0);
 
@@ -134,19 +138,26 @@ public class Programa {
 		System.out.println();
 		System.out.println("Deseja excluir algum cliente? (S/N)");
         char resposta = sc.next().toUpperCase().charAt(0);
-
+		
         if (resposta == 'S') {
-            System.out.println("Digite o nome do cliente a ser excluído:");
-			sc.nextLine();
-            String clienteExcluir = sc.nextLine();
-
-            for (Cliente cliente : listaClientes) {
-                if (cliente.getNome() == clienteExcluir) {
-                    agenda.removeCliente(cliente);
-                    break;
-                }
-            }
-		}
+			System.out.println();
+			System.out.println("Quantos clientes excluir?");
+			int quantExcluir = sc.nextInt();
+			
+			for (int i = 0; i < quantExcluir; i++) {
+				System.out.println();
+				System.out.println("Cliente para excluir #" + (i+1) + ":");
+				System.out.println("Digite o horário desse cliente:");
+				sc.nextLine();
+				String horarioExcluir = sc.nextLine().toUpperCase();
+	
+				for (Cliente c : listaClientes) {
+					if (c.getHorarioEscolhido().equals(horarioExcluir)) {
+						agenda.removeCliente(c);
+						System.out.println("Cliente do horário " + c.getHorarioEscolhido() + " excluído");
+					}
+				}
+			}
 
 		// Exibir faturamento
 		System.out.println();
@@ -178,6 +189,7 @@ public class Programa {
 			System.out.println("Forma de pagamento inválida.");
 		}*/
 	}
+}
 }
 // Colocar parte da fatura total
 

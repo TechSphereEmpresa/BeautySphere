@@ -40,8 +40,8 @@ public class Agenda {
     	listaClientes.add(cliente);
     }
 
-	public void removeCliente (Cliente cliente) {
-    	listaClientes.remove(cliente);
+	public void removeCliente (Cliente c) {
+    	listaClientes.remove(c);
     }
 
 	public void exibirHorarios() {
