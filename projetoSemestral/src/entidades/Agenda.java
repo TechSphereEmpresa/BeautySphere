@@ -40,24 +40,26 @@ public class Agenda {
     	listaClientes.add(cliente);
     }
 
-	public void removeCliente(Cliente cliente) {
-		listaClientes.remove(cliente);
-	}
-    
+	public void removeCliente (Cliente cliente) {
+    	listaClientes.remove(cliente);
+    }
+
 	public void exibirHorarios() {
 		for (Horas h : horariosDisponiveis) {
-			System.out.println("• " + h.getHora() + " (" + h + ")");
+			System.out.println("• " + h);
 		}
 	}
-	
+    
 	public void marcarHorario(String horarioEscolhido) {
 		Horas hEscolhido = Horas.valueOf(horarioEscolhido);
 		horariosDisponiveis.remove(hEscolhido); // Remove o horário da lista de disponíveis
 	}
 	
     public void exibirAgenda() {
-    	for (Cliente c : listaClientes) {
-			System.out.println(c);
+		listaClientes.sort((c1, c2) -> Horas.valueOf(c1.getHorarioEscolhido()).compareTo(Horas.valueOf(c2.getHorarioEscolhido())));
+
+		for (Cliente c : listaClientes) { 
+			System.out.println(c); 
 		}
-    }
+	}
 }

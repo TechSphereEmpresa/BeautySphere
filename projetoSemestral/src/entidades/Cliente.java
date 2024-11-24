@@ -2,6 +2,8 @@ package entidades;
 
 import java.util.List;
 
+import entidades.Enumeradas.Horas;
+
 public class Cliente {
 	private String nome;
 	private String horarioEscolhido;
@@ -40,6 +42,6 @@ public class Cliente {
 
 	@Override
     public String toString() {
-        return horarioEscolhido + " - " + nome + ", " + servico;
+		return Horas.valueOf(horarioEscolhido) + ": " + nome + ", " + servico;
     }
 }

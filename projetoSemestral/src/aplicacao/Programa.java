@@ -148,9 +148,9 @@ public class Programa {
             }
 		}
 
-		// Exibir a agenda
+		// Exibir faturamento
 		System.out.println();
-		System.out.println("Cronograma do dia:");
+		System.out.println("Faturamento do dia:");
 		agenda.exibirAgenda();
 
 		/*// Cartão ou Dinheiro
