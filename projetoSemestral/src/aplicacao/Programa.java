@@ -11,11 +11,9 @@ import entidades.Corte;
 import entidades.Penteado;
 import entidades.Servico;
 import entidades.Enumeradas.Cortes;
-import entidades.Enumeradas.Dias;
 import entidades.Enumeradas.Horas;
 import entidades.Enumeradas.Penteados;
 import entidades.PagamentoBoleto;
-import entidades.Dinheiro;
 import entidades.Pagamento;
 
 public class Programa {
@@ -40,6 +38,7 @@ public class Programa {
 		int n = sc.nextInt();
 
 		// Digitar clientes
+		if(n <= 7){
 		for (int i = 0; i < n; i++) {
 			System.out.println();
 			System.out.println("Cliente #" + (i + 1) + ":");
@@ -170,6 +169,7 @@ public class Programa {
 				System.out.println("Serviço inválido");
 			}
 		}
+	
 
 		// Exibir a agenda
 		System.out.println();
@@ -207,7 +207,12 @@ public class Programa {
 		System.out.println();
 		System.out.println("Faturamento do dia:");
 		agenda.exibirAgenda();
+
+		sc.close();
+	}else{
+		System.out.println("Quantidade de clientes inválida.");
 	}
+	} 
 }
 // Colocar parte da fatura total
 

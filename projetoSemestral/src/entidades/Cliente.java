@@ -1,7 +1,5 @@
 package entidades;
 
-import java.util.List;
-
 import entidades.Enumeradas.Horas;
 
 public class Cliente {
@@ -52,6 +50,6 @@ public class Cliente {
 
 	@Override
     public String toString() {
-		return Horas.valueOf(horarioEscolhido) + ": " + nome + ", " + servico + ". Valor R%" + pagamento.realizarPagamento();
+		return Horas.valueOf(horarioEscolhido) + ": " + nome + ", " + servico + ". Valor R$ " + String.format("%.2f", pagamento.realizarPagamento());
     }
 }
