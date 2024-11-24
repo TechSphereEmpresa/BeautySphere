@@ -29,6 +29,7 @@ public class Programa {
 		Servico servico;
 		double taxa = 1.05;
 		Pagamento pagamento = null;
+		int nParcelas = 0;
 
 		System.out.println("Registro de clientes da TechSphere");
 		System.out.println();
@@ -119,10 +120,16 @@ public class Programa {
 				double valor = servico.valor();
 				if (pagamentoEscolhido == 'B') {
 					System.out.println();
-					System.out.println("Digite o número de parcelas:");
-					int nParcelas = sc.nextInt();
-					pagamento = new PagamentoBoleto(valor, taxa, nParcelas);
-					
+					while (true) {
+						System.out.println("Digite o número de parcelas (até 3x):");
+						nParcelas = sc.nextInt();
+						if (nParcelas <= 3 && nParcelas > 0) { 
+							pagamento = new PagamentoBoleto(valor, taxa, nParcelas);
+							break;  // Sai do loop se o número de parcelas for válido
+						} else {
+							System.out.println("Número de parcelas inválido. Por favor, insira um número de parcelas entre 1 e 3.");
+						}
+					}
 				} else if (pagamentoEscolhido == 'D') {
 					pagamento = new Pagamento(valor);
 				}
@@ -154,10 +161,16 @@ public class Programa {
 				double valor = servico.valor();
 				if (pagamentoEscolhido == 'B') {
 					System.out.println();
-					System.out.println("Digite o número de parcelas:");
-					int nParcelas = sc.nextInt();
-					pagamento = new PagamentoBoleto(valor, taxa, nParcelas);
-					
+					while (true) {
+						System.out.println("Digite o número de parcelas (até 3x):");
+						nParcelas = sc.nextInt();
+						if (nParcelas <= 3 && nParcelas > 0) { 
+							pagamento = new PagamentoBoleto(valor, taxa, nParcelas);
+							break;  // Sai do loop se o número de parcelas for válido
+						} else {
+							System.out.println("Número de parcelas inválido. Por favor, insira um número de parcelas entre 1 e 3.");
+						}
+					}
 				} else if (pagamentoEscolhido == 'D') {
 					pagamento = new Pagamento(valor);
 				}
