@@ -35,7 +35,4 @@ public class PagamentoBoleto extends Pagamento {
 		return Parcelar();
 	}
 
-	/*public String toString() {
-		return "Pagamento com cartão realizado no valor de: R$" + valorComTaxa;
-	}*/
 }

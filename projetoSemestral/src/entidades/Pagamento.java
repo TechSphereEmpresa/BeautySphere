@@ -20,21 +20,4 @@ public class Pagamento {
 			return valor;
 		}
 		
-		/*public void setFaturamentoTotal(Double faturamentoTotal) {
-			this.faturamentoTotal = faturamentoTotal;
-		}
-
-		public double getFaturamentoTotal() {
-            return faturamentoTotal;
-        }
-    
-        public void setFaturamentoTotal(double faturamentoTotal) {
-            this.faturamentoTotal = faturamentoTotal;
-        }
-    
-        public double faturamento() {
-            return faturamentoTotal;
-        }*/
-		
-		
     }
