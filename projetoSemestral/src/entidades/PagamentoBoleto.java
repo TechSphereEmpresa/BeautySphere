@@ -4,8 +4,8 @@ public class PagamentoBoleto extends Pagamento {
 	private Double taxa;
 	private Integer nParcelas;
 	
-	public PagamentoBoleto(Double valorServico, Double taxa, Integer nParcelas) {
-		super(valorServico);
+	public PagamentoBoleto(Double valor, Double taxa, Integer nParcelas) {
+		super(valor);
 		this.taxa = taxa;
 		this.nParcelas = nParcelas;
 	}
